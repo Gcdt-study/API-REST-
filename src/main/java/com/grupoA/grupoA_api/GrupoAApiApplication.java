@@ -2,8 +2,10 @@ package com.grupoA.grupoA_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.grupoA.grupoA_api")
+@EnableJpaRepositories("com.grupoA.grupoA_api.repository")
 public class GrupoAApiApplication {
 
 	public static void main(String[] args) {
