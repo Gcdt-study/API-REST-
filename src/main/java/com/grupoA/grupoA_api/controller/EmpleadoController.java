@@ -49,19 +49,31 @@ public class EmpleadoController {
     //endregion
 
     //region PUT
-    @GetMapping("/{id}")
-    public Empleado reescribirEmpleado(@RequestBody Empleado empleado) {
-        Optional<Empleado> empleadoExistente = empleadoService.buscarPorId(empleado.getId());
+    @PutMapping("/{id}")
+    public Empleado reescribirEmpleado(@PathVariable Long id, @RequestBody Empleado empleado) {
+        Optional<Empleado> empleadoExistente = empleadoService.buscarPorId(id);
 
         if (empleadoExistente.isPresent()) {
-
+            //Esta línea modifica la instancia de empleado que recibe y se asegura de que su id sea el del empleado
+            //que ya existía, lo que machacará la información y no crear un registro nuevo
+            empleado.setId(id);
+            return empleadoService.guardar(empleado);
         }
-
-
         return null;
     }
     //endregion
 
     //region DELETE
+    @DeleteMapping
+    public Empleado eliminarEmpleado(@PathVariable Long id) {
+        Optional<Empleado> empleado = empleadoService.buscarPorId(id);
+
+        if (empleado.isPresent()) {
+            empleadoService.eliminar(id);
+            return empleado.get();  // Devuelve el empleado que se eliminó
+        }
+
+        return null;  // No existe
+    }
     //endregion
 }
