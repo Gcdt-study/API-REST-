@@ -14,6 +14,11 @@ public class Bebida {
 
     public Bebida() {}
 
+    public Bebida(String nombre, String foto) {
+        this.nombre = nombre;
+        this.foto = foto;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -22,4 +27,5 @@ public class Bebida {
 
     public String getFoto() { return foto; }
     public void setFoto(String foto) { this.foto = foto; }
+
 }
